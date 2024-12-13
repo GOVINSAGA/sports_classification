@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Image Classification</title>
+</head>
+<body>
+    <h1>Upload an Image for Classification</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" id="file-input" accept="image/*" required>
+        <button type="submit">Upload and Predict</button>
+    </form>
+    <p id="prediction-result"></p>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const fileInput = document.getElementById('file-input');
+            formData.append('file', fileInput.files[0]);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (result.predicted_class) {
+                document.getElementById('prediction-result').innerText = `Predicted Class: ${result.predicted_class}`;
+            } else if (result.error) {
+                document.getElementById('prediction-result').innerText = `Error: ${result.error}`;
+            }
+        });
+    </script>
+</body>
+</html>
