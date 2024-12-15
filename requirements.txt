@@ -151,3 +151,4 @@ jaraco.functools==4.0.1
 jaraco.text==3.12.1
 more-itertools==10.3.0
 typeguard==4.3.0
+gunicorn
