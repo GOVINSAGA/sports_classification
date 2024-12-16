@@ -47,6 +47,3 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-git add app.py
-git commit -m "updated app.py to run on cpu on render"
-git push origin main
