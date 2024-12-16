@@ -34,7 +34,8 @@ def predict():
         file.save(filepath)
 
         # Make prediction
-        results = model.predict(source=filepath, device='cuda')
+        results = model.predict(source=filepath, device='cpu')
+
         predicted_idx = results[0].probs.data.argmax().item()
         predicted_class = class_dict.get(predicted_idx, "Unknown Class")
 
@@ -44,3 +45,8 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+git add app.py
+git commit -m "updated app.py to run on cpu on render"
+git push origin main
